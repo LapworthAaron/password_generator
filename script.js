@@ -159,13 +159,18 @@ function getPasswordOptions() {
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+    return arr[Math.floor(Math.random() * (84 + 1))];
 }
 
 // Function to generate password with user input
 function generatePassword() {
     reinitialise(); //reinitialise all the global variables to start afresh on each button click
     getPasswordOptions(); //get all options for the password
+    //generate the password using random selection from the options array
+    for (i = 0; i < userPromptlength; i++) {
+        passwordArray[i] = getRandom(passwordSelection);
+    }
+    return passwordArray.join(""); //convert to string for output to page
 }
 
 // Get references to the #generate element
