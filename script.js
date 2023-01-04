@@ -97,6 +97,18 @@ var userPromptspecial = "";
 var passwordSelection = [];
 var passwordArray = [];
 
+//function to reinitialise all global variables so the generate button starts the flow again
+function reinitialise() {
+    userPromptlength = 0;
+    userPromptlower = "";
+    userPromptupper = "";
+    userPromptnumber = "";
+    userPromptspecial = "";
+    passwordSelection = [];
+    passwordArray = [];
+    return;
+}
+
 //function to prompt user to set some settings
 function promptUser(promptType, promptMessage) {
     while (promptType != "y" && promptType != "n") {
@@ -152,7 +164,8 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-
+    reinitialise(); //reinitialise all the global variables to start afresh on each button click
+    getPasswordOptions(); //get all options for the password
 }
 
 // Get references to the #generate element
