@@ -88,6 +88,15 @@ var specialCharacters = [
     'Z'
   ];
 
+//global variables used for storing information to be used in functions
+var userPromptlength = 0;
+var userPromptlower = "";
+var userPromptupper = "";
+var userPromptnumber = "";
+var userPromptspecial = "";
+var passwordSelection = [];
+var passwordArray = [];
+
 //function to prompt user to set some settings
 function promptUser(promptType, promptMessage) {
     while (promptType != "y" && promptType != "n") {
@@ -97,14 +106,43 @@ function promptUser(promptType, promptMessage) {
     return promptType;
 }
 
-userPromptlower = promptUser(userPromptlower, "Would you like to use lowercase characters (y or n)?");
-userPromptupper = promptUser(userPromptupper, "Would you like to use uppercase characters (y or n)?");
-userPromptnumber = promptUser(userPromptnumber, "Would you like to use numeric characters (y or n)?");
-userPromptspecial = promptUser(userPromptspecial, "Would you like to use special characters (y or n)?");
-  
+//function to check if a particular setting was used and merge arrays if so
+function optionsArray(optionStatus, arrOpt) {
+    if (optionStatus === "y") {
+        if (passwordSelection.length == 0) {
+            passwordSelection = arrOpt;
+        } else {
+            passwordSelection = [].concat(passwordSelection, arrOpt);
+        }
+    }
+    return passwordSelection;
+}
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-
+    while (userPromptlength < 10 || userPromptlength > 64) {
+        userPromptlength = prompt("How many characters would you like to use (10-64)?");
+    }
+    var loopCondition = 0;
+    while (loopCondition == 0) {
+        userPromptlower = promptUser(userPromptlower, "Would you like to use lowercase characters (y or n)?");
+        userPromptupper = promptUser(userPromptupper, "Would you like to use uppercase characters (y or n)?");
+        userPromptnumber = promptUser(userPromptnumber, "Would you like to use numeric characters (y or n)?");
+        userPromptspecial = promptUser(userPromptspecial, "Would you like to use special characters (y or n)?");
+        if (userPromptlower === "n" && userPromptupper === "n" 
+            && userPromptnumber === "n" && userPromptspecial === "n")
+        {
+            loopCondition = 0;
+            alert("You haven't selected any options, please try again")
+        } else {
+            loopCondition = 1;
+        }
+    }
+    optionsArray(userPromptlower, lowerCasedCharacters);
+    optionsArray(userPromptupper, upperCasedCharacters);
+    optionsArray(userPromptnumber, numericCharacters);
+    optionsArray(userPromptspecial, specialCharacters);
+    return;
 }
 
 // Function for getting a random element from an array
