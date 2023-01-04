@@ -87,32 +87,46 @@ var specialCharacters = [
     'Y',
     'Z'
   ];
+
+//function to prompt user to set some settings
+function promptUser(promptType, promptMessage) {
+    while (promptType != "y" && promptType != "n") {
+        promptType = prompt(promptMessage);
+        promptType = promptType.toLowerCase();
+    }
+    return promptType;
+}
+
+userPromptlower = promptUser(userPromptlower, "Would you like to use lowercase characters (y or n)?");
+userPromptupper = promptUser(userPromptupper, "Would you like to use uppercase characters (y or n)?");
+userPromptnumber = promptUser(userPromptnumber, "Would you like to use numeric characters (y or n)?");
+userPromptspecial = promptUser(userPromptspecial, "Would you like to use special characters (y or n)?");
   
-  // Function to prompt user for password options
-  function getPasswordOptions() {
-  
-  }
-  
-  // Function for getting a random element from an array
-  function getRandom(arr) {
-  
-  }
-  
-  // Function to generate password with user input
-  function generatePassword() {
-  
-  }
-  
-  // Get references to the #generate element
-  var generateBtn = document.querySelector('#generate');
-  
-  // Write password to the #password input
-  function writePassword() {
+// Function to prompt user for password options
+function getPasswordOptions() {
+
+}
+
+// Function for getting a random element from an array
+function getRandom(arr) {
+
+}
+
+// Function to generate password with user input
+function generatePassword() {
+
+}
+
+// Get references to the #generate element
+var generateBtn = document.querySelector('#generate');
+
+// Write password to the #password input
+function writePassword() {
     var password = generatePassword();
     var passwordText = document.querySelector('#password');
-  
+
     passwordText.value = password;
-  }
-  
-  // Add event listener to generate button
-  generateBtn.addEventListener('click', writePassword);
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener('click', writePassword);
