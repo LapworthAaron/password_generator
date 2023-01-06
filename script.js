@@ -177,7 +177,7 @@ function getRandom(arr) {
     return arr[Math.floor((Math.random() * passwordSelection.length))];
 }
 
-// Function to generate password with user input
+// Function to generate password with user input - start point of the program
 function generatePassword() {
     reinitialise(); // reinitialise all the global variables to start afresh on each button click
     getPasswordOptions(); // get all options for the password
