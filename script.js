@@ -109,11 +109,11 @@ function reinitialise() {
     return;
 }
 
-//function to prompt user to set some settings
+//function to prompt user to set some settings, message is fed as an arguement
 function promptUser(promptType, promptMessage) {
     while (promptType != "y" && promptType != "n") {
         promptType = prompt(promptMessage);
-        promptType = promptType.toLowerCase();
+        promptType = promptType.toLowerCase(); //convert to lowercase, so the user have use Y/y or N/n
     }
     return promptType;
 }
@@ -130,6 +130,15 @@ function optionsArray(optionStatus, arrOpt) {
     return passwordSelection;
 }
 
+//series of prompts for what options they want for their password
+function userPrompts() {
+    userPromptlower = promptUser(userPromptlower, "Would you like to use lowercase characters (y or n)?");
+    userPromptupper = promptUser(userPromptupper, "Would you like to use uppercase characters (y or n)?");
+    userPromptnumber = promptUser(userPromptnumber, "Would you like to use numeric characters (y or n)?");
+    userPromptspecial = promptUser(userPromptspecial, "Would you like to use special characters (y or n)?");
+    return;
+}
+
 // Function to prompt user for password options
 function getPasswordOptions() {
     while (userPromptlength < 10 || userPromptlength > 64) {
@@ -137,17 +146,15 @@ function getPasswordOptions() {
     }
     var loopCondition = 0;
     while (loopCondition == 0) {
-        userPromptlower = promptUser(userPromptlower, "Would you like to use lowercase characters (y or n)?");
-        userPromptupper = promptUser(userPromptupper, "Would you like to use uppercase characters (y or n)?");
-        userPromptnumber = promptUser(userPromptnumber, "Would you like to use numeric characters (y or n)?");
-        userPromptspecial = promptUser(userPromptspecial, "Would you like to use special characters (y or n)?");
+        userPrompts(); //ask what characters they want
         if (userPromptlower === "n" && userPromptupper === "n" 
-            && userPromptnumber === "n" && userPromptspecial === "n")
+            && userPromptnumber === "n" && userPromptspecial === "n") //make sure the user hasn't said not to all the options
         {
             loopCondition = 0;
-            alert("You haven't selected any options, please try again")
+            alert("You haven't selected any options, please try again") //alert them to the fact they haven't 
+            userPrompts(); //ask what characters they want
         } else {
-            loopCondition = 1;
+            loopCondition = 1; //exit loop once on of the options is 'y'
         }
     }
     optionsArray(userPromptlower, lowerCasedCharacters);
