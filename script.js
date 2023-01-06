@@ -88,7 +88,7 @@ var specialCharacters = [
     'Z'
   ];
 
-//global variables used for storing information to be used in functions
+// global variables used for storing information to be used in functions
 var userPromptlength = 0;
 var userPromptlower = "";
 var userPromptupper = "";
@@ -97,19 +97,24 @@ var userPromptspecial = "";
 var passwordSelection = [];
 var passwordArray = [];
 
-//function to reinitialise all global variables so the generate button starts the flow again
-function reinitialise() {
-    userPromptlength = 0;
+// function to reset only the character options incase a user put 'n' for all of them
+function blankOptions() {
     userPromptlower = "";
     userPromptupper = "";
     userPromptnumber = "";
     userPromptspecial = "";
+}
+
+// function to reinitialise all global variables so the generate button starts the flow again
+function reinitialise() {
+    userPromptlength = 0;
+    blankOptions();
     passwordSelection = [];
     passwordArray = [];
     return;
 }
 
-//function to prompt user to set some settings, message is fed as an arguement
+// function to prompt user to set some settings, message is fed as an arguement
 function promptUser(promptType, promptMessage) {
     while (promptType != "y" && promptType != "n") {
         promptType = prompt(promptMessage);
@@ -118,7 +123,7 @@ function promptUser(promptType, promptMessage) {
     return promptType;
 }
 
-//function to check if a particular setting was used and merge arrays if so
+// function to check if a particular setting was used and merge arrays if so
 function optionsArray(optionStatus, arrOpt) {
     if (optionStatus === "y") {
         if (passwordSelection.length == 0) {
@@ -130,7 +135,7 @@ function optionsArray(optionStatus, arrOpt) {
     return passwordSelection;
 }
 
-//series of prompts for what options they want for their password
+// series of prompts for what options they want for their password
 function userPrompts() {
     userPromptlower = promptUser(userPromptlower, "Would you like to use lowercase characters (y or n)?");
     userPromptupper = promptUser(userPromptupper, "Would you like to use uppercase characters (y or n)?");
@@ -144,19 +149,22 @@ function getPasswordOptions() {
     while (userPromptlength < 10 || userPromptlength > 64) {
         userPromptlength = prompt("How many characters would you like to use (10-64)?");
     }
+    // validate if the user has said y to any option and repeat questions if they haven't
     var loopCondition = 0;
     while (loopCondition == 0) {
         userPrompts(); //ask what characters they want
         if (userPromptlower === "n" && userPromptupper === "n" 
-            && userPromptnumber === "n" && userPromptspecial === "n") //make sure the user hasn't said not to all the options
+            && userPromptnumber === "n" && userPromptspecial === "n") // make sure the user hasn't said not to all the options
         {
             loopCondition = 0;
-            alert("You haven't selected any options, please try again") //alert them to the fact they haven't 
-            userPrompts(); //ask what characters they want
+            blankOptions(); // reset options variables
+            alert("You haven't selected any options, please try again"); //alert them to the fact they haven't 
+            userPrompts(); // ask what characters they want
         } else {
-            loopCondition = 1; //exit loop once on of the options is 'y'
+            loopCondition = 1; // exit loop once on of the options is 'y'
         }
     }
+    // merge all the arrays, the function will check which ones need to me merged
     optionsArray(userPromptlower, lowerCasedCharacters);
     optionsArray(userPromptupper, upperCasedCharacters);
     optionsArray(userPromptnumber, numericCharacters);
@@ -171,13 +179,13 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-    reinitialise(); //reinitialise all the global variables to start afresh on each button click
-    getPasswordOptions(); //get all options for the password
-    //generate the password using random selection from the options array
+    reinitialise(); // reinitialise all the global variables to start afresh on each button click
+    getPasswordOptions(); // get all options for the password
+    // generate the password using random selection from the options array
     for (i = 0; i < userPromptlength; i++) {
         passwordArray[i] = getRandom(passwordSelection);
     }
-    return passwordArray.join(""); //convert to string for output to page
+    return passwordArray.join(""); // convert to string for output to page
 }
 
 // Get references to the #generate element
