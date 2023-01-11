@@ -19,8 +19,8 @@ Some of the acceptance criteria for this project:
   * Code should validate for each input and at least one character type should be selected
   * Once prompts are answered then the password should be generated and displayed in an alert or written to the page
 
-Website: https://lapworthaaron.github.io/password_generator_week5_assignment/
-<br>Repository: https://github.com/LapworthAaron/password_generator_week5_assignment
+Website: https://lapworthaaron.github.io/password_generator/
+<br>Repository: https://github.com/LapworthAaron/password_generator
 
 Having learnt Javascript 18yrs ago and used numerous languages since, i'm familiar with all the concepts, I had some trouble with when to return to a variable/array and when not too, based on whether i was writing to the arguements or global variables/arrays.
 
